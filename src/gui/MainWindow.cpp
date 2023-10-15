@@ -107,7 +107,7 @@ namespace law
       }
       _ModeActions_po->setEnabled(isConnected);
       _ModeActionsDict_map[EC_MODE::CLOSE]->setChecked(true);
-      _CANSpeed_po->setEnabled(true);
+      _CANSpeed_po->setEnabled(isConnected);
 
       _ConnectionTimer_po->stop();
     }
