@@ -7,6 +7,7 @@
 #include <QJsonValue>
 #include <QStandardPaths>
 #include <QFile>
+#include <QDir>
 #include <QTimer>
 #include <QDebug>
 
@@ -149,10 +150,11 @@ namespace law
   void DSettings::save_slt()
   {
     setCurrentPort_slt(_Widget_po->port_cb->currentText());
+    QDir().mkpath(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation));
     QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/" + SETTINGS_FILENAME;
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly)) {
-      qWarning()<<tr("No settings file to load!");
+      qWarning()<<tr("No settings file to load! ")<<path<<file.errorString();
       return;
     }
     QJsonObject mainObject;
